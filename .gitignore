@@ -1,0 +1,4 @@
+node_modules/
+dist/
+# The key that writes the run records. Keep a copy somewhere safe.
+.env

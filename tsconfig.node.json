@@ -1,0 +1,23 @@
+{
+  // The code Node runs: the scripts (Node 24 strips their types, so they use
+  // only erasable syntax and import with the .ts extension), the tests, and
+  // the Vite config. They may import the DOM-free modules of src/.
+  "compilerOptions": {
+    "strict": true,
+    "target": "ES2023",
+    "lib": ["ES2023"],
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "types": ["node"],
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+    "erasableSyntaxOnly": true,
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": true
+  },
+  "include": ["scripts", "test", "vite.config.ts"]
+}

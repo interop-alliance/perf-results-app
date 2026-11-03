@@ -1,0 +1,41 @@
+{
+  "name": "perf-results-app",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A page over the pnpm perf:remote run records of the PWS reference server, read from a public Collection on a PWS server.",
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "packageManager": "pnpm@11.20.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc -p tsconfig.json && tsc -p tsconfig.node.json",
+    "lint": "eslint .",
+    "fix": "eslint --fix . && prettier --write .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest run",
+    "check": "pnpm typecheck && pnpm lint && pnpm format:check && pnpm test && pnpm build",
+    "new-key": "node --env-file-if-exists=.env scripts/new-key.ts",
+    "provision": "node --env-file-if-exists=.env scripts/provision.ts",
+    "upload": "node --env-file-if-exists=.env scripts/upload.ts"
+  },
+  "dependencies": {
+    "@interop/pws-client": "^0.106.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^26.6.6",
+    "eslint": "^10.8.0",
+    "eslint-config-prettier": "^10.1.8",
+    "globals": "^17.9.0",
+    "prettier": "^3.9.10",
+    "typescript": "~6.0.3",
+    "typescript-eslint": "^8.66.0",
+    "vite": "^8.3.5",
+    "vitest": "^4.1.10"
+  }
+}

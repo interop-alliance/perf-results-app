@@ -1,0 +1,55 @@
+name: Pages
+
+# Publishes the built page to GitHub Pages on every push to main, or by hand
+# from the Actions tab. It runs the full check first, so a main that fails it
+# publishes nothing. In the repo settings, Pages takes its source from GitHub
+# Actions. The page holds no data: it reads the run records from the PWS server
+# each time it opens.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+
+      # Provision pnpm via Corepack (bundled with Node) from the
+      # `packageManager` pin in package.json.
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # Type-check, lint, format check, tests, then the build into dist/.
+      - name: Check and build
+        run: pnpm check
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: dist
+
+      - id: deployment
+        uses: actions/deploy-pages@v4

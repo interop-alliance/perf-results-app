@@ -1,0 +1,36 @@
+<!doctype html>
+<!--
+  The perf results page. The markup is the frame; src/main.ts reads the run
+  records from the PWS server and fills it.
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Perf results</title>
+    <link rel="stylesheet" href="./src/styles.css" />
+    <script type="module" src="./src/main.ts"></script>
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>Perf results</h1>
+        <p id="meta" class="muted"></p>
+      </header>
+      <div class="controls">
+        <label class="field">
+          <span>Series: runner / host</span>
+          <select id="series"></select>
+        </label>
+      </div>
+      <nav class="tabs" role="tablist">
+        <button type="button" role="tab" data-view="trend">Over time</button>
+        <button type="button" role="tab" data-view="compare">
+          Side by side
+        </button>
+        <button type="button" role="tab" data-view="runs">Runs</button>
+      </nav>
+      <section id="view"></section>
+    </main>
+  </body>
+</html>
